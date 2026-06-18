@@ -1,4 +1,53 @@
-# Career-Ops
+# Career-Ops Korea 🇰🇷
+
+<p align="center">
+  <strong>career-ops v1.12.0 + Korean job portal integration</strong><br>
+  <sub>JobKorea·Saramin auto-scan & auto-apply · 14 modes · 20+ providers · Go TUI dashboard</sub>
+</p>
+
+<p align="center">
+  <a href="https://github.com/macho715/career-ops-korea"><img src="https://img.shields.io/badge/fork-career--ops--korea-blue" alt="Fork"></a>
+  <a href="#korea-integration"><img src="https://img.shields.io/badge/%ED%95%9C%EA%B5%AD-JobKorea%20%7C%20Saramin-red" alt="Korea"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-%3E%3D18-brightgreen" alt="Node"></a>
+</p>
+
+---
+
+## 🇰🇷 Korea Integration
+
+This fork adds native support for Korean job portals:
+
+| Feature | JobKorea | Saramin |
+|---------|----------|---------|
+| Scan | Playwright headless | Official REST API |
+| Apply | ✅ Auto-fill (16 fields) | ✅ Auto-fill (headed) |
+| Legal risk | ⚠ Personal use only | ✅ Official API |
+| Speed | ~15s/page | ~200ms/page |
+
+### Quick Start (Korea)
+
+```bash
+npm install && npx playwright install chromium
+cp config/jobkorea-profile.yml.example config/jobkorea-profile.yml
+# → Edit with your details
+
+# Scan Korean job portals
+node scan.mjs --company "JobKorea"
+node scan.mjs --company "Saramin"
+
+# Auto-apply
+node jobkorea-apply.mjs --report 42 --dry-run
+node saramin-apply.mjs --report 42 --headless=false
+```
+
+> **Saramin** requires a free access key: [oapi.saramin.co.kr/join](https://oapi.saramin.co.kr/join)  
+> **JobKorea** blocks headless — use `--headless=false` for apply  
+> 📖 Full docs: [`korea-integration/`](korea-integration/)
+
+---
+
+## Original Career-Ops
 
 [English](README.md) | [Español](README.es.md) | [Français](README.fr.md) | [Português (Brasil)](README.pt-BR.md) | [한국어](README.ko-KR.md) | [日本語](README.ja.md) | [简体中文](README.cn.md) | [繁體中文](README.zh-TW.md) | [Українська](README.ua.md) | [Русский](README.ru.md) | [Polski](README.pl.md) | [العربية](README.ar.md)
 
