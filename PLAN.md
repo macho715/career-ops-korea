@@ -38,10 +38,16 @@ flowchart LR
 | JobKorea Playwright scanner | ✅ Done | `providers/jobkorea.mjs` |
 | Saramin REST API provider | ✅ Done | `providers/saramin.mjs` |
 | JobKorea auto-apply script | ✅ Done | `jobkorea-apply.mjs` |
+| Saramin auto-apply script | ✅ Done | `saramin-apply.mjs` |
 | JobKorea integrated mode | ✅ Done | `modes/jobkorea.md` |
-| Config templates | ✅ Done | `config/jobkorea-profile.yml.example` |
-| Root docs update | ✅ Done | `CHANGELOG.md`, `docs/ARCHITECTURE.md`, `docs/SETUP.md` |
+| Config templates | ✅ Done | `jobkorea-profile.yml.example`, `saramin-profile.yml.example` |
+| Root docs update | ✅ Done | `CHANGELOG.md`, `ARCHITECTURE.md`, `SETUP.md`, `PLAN.md` |
 | GitHub publish | ✅ Done | `github.com/macho715/career-ops-korea` |
+| Korean README | ✅ Done | Full 한글 README rewrite |
+| Safety guidelines | ✅ Done | `docs/JOBKOREA_SAFETY.md` (7원칙) |
+| Site structure mapping | ✅ Done | `docs/JOBKOREA_STRUCTURE.md` |
+| Chrome DevTools MCP | ✅ Done | `~/.config/opencode/opencode.json` |
+| Apply script hardening | ✅ Done | headed 강제, 세션 제한, PREFLIGHT
 
 ## Phase 2 — Personalization (Current)
 

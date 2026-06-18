@@ -11,15 +11,21 @@
 * **apply:** add Saramin auto-apply script (`saramin-apply.mjs`) — headed Playwright mode (Saramin blocks headless), same 16-field category detection, saramin-profile.yml integration, military service field support
 * **config:** add `config/saramin-profile.yml.example` — Saramin application form template with military service, education detail, language test scores
 * **docs:** add full documentation bundle in `korea-integration/` (README, CHANGELOG, SYSTEM_ARCHITECTURE, run.mjs entry point)
+* **safety:** add JobKorea safety guidelines (`docs/JOBKOREA_SAFETY.md`) — 7-principle safe usage rules, rate limits, headless blocking, session tracking, Saramin comparison
+* **safety:** harden `jobkorea-apply.mjs` — force headed mode, daily/session apply limits (10/5), mandatory PREFLIGHT review, safety rule console display
+* **docs:** add JobKorea site structure mapping (`docs/JOBKOREA_STRUCTURE.md`) — search/detail/apply/login page selectors, SPA characteristics, 16 form field categories
+* **dev:** add Chrome DevTools MCP server config (`~/.config/opencode/opencode.json`) — enables live DOM inspection, network analysis, performance tracing
+* **docs:** rewrite README.md to full Korean — remove original English content, Korea-focused main page
 
 ### Documentation
 
-* **docs:** update `AGENTS.md` skill mode table with `jobkorea` mode entry
+* **docs:** update `AGENTS.md` skill mode table with `jobkorea` + `saramin` mode entries
 * **docs:** add `korea-integration/SYSTEM_ARCHITECTURE.md` with Mermaid component diagrams
 * **docs:** update `portals.yml` and `templates/portals.example.yml` with JobKorea + Saramin entries
 * **docs:** update `docs/ARCHITECTURE.md` with Korea provider layer and Mermaid data flow
 * **docs:** update `docs/SETUP.md` with Korean market setup section
-* **docs:** add `PLAN.md` — Korea integration roadmap and next milestones
+* **docs:** add `PLAN.md` — 6-phase Korea integration roadmap + risk register
+* **repo:** squash to single clean commit, add 10 GitHub topics, Korean README main page
 
 ## [1.12.0](https://github.com/santifer/career-ops/compare/career-ops-v1.11.0...career-ops-v1.12.0) (2026-06-18)
 
