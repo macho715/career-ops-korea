@@ -1,0 +1,93 @@
+# Saramin Profile — 사람인 자동 지원서 작성 설정
+# Copy: cp config/saramin-profile.yml.example config/saramin-profile.yml
+# ⚠ Contains sensitive data — NEVER commit to git.
+
+saramin:
+  # ── 로그인 정보 ──────────────────────────────────────────────────
+  id: ""                    # 사람인 아이디
+  password: ""              # 사람인 비밀번호
+
+  # ── 기본 인적사항 ────────────────────────────────────────────────
+  name_kor: ""              # 한글 이름
+  email: ""                 # 이메일
+  phone: ""                 # 전화번호 (010-XXXX-XXXX 형식)
+  birth: ""                 # 생년월일 (YYYYMMDD)
+
+  # ── 주소 ─────────────────────────────────────────────────────────
+  address:
+    zipcode: ""             # 우편번호
+    road: ""                # 도로명 주소
+    detail: ""              # 상세주소
+
+  # ── 학력 ─────────────────────────────────────────────────────────
+  education:
+    level: ""               # 고졸 / 전문대졸 / 대졸(4년) / 대학원(석사) / 대학원(박사)
+    school: ""              # 최종학교명
+    major: ""               # 전공
+    graduation_status: ""   # 졸업 / 재학 / 수료 / 중퇴 / 졸업예정
+    entrance_year: ""       # 입학년도
+    graduation_year: ""     # 졸업년도
+
+  # ── 경력 ─────────────────────────────────────────────────────────
+  career:
+    total_years: ""         # 총 경력 (년)
+    recent_company: ""      # 최근 회사명
+    recent_department: ""   # 근무부서
+    recent_position: ""     # 직급/직책
+    recent_tenure_start: "" # 최근 회사 입사일 (YYYY-MM)
+    recent_tenure_end: ""   # 최근 회사 퇴사일 (YYYY-MM)
+    recent_salary: ""       # 최근 연봉 (만원)
+    responsibilities: ""    # 담당업무 요약
+
+  # ── 병역 ─────────────────────────────────────────────────────────
+  military:
+    status: ""              # 해당없음 / 군필 / 면제 / 미필
+    branch: ""              # 육군 / 해군 / 공군 / 해병대
+    rank: ""                # 병장 / 중사 / 대위 ...
+    start_date: ""          # 복무 시작일
+    end_date: ""            # 복무 종료일
+
+  # ── 희망 근무 조건 ───────────────────────────────────────────────
+  desired:
+    employment_type: ""     # 정규직 / 계약직 / 인턴 / 프리랜서
+    regions: []             # 희망 지역 ["서울", "경기"]
+    salary: ""              # 희망 연봉 (만원)
+    min_salary: ""          # 최소 연봉
+
+  # ── 어학 ─────────────────────────────────────────────────────────
+  language:
+    english:
+      test: ""              # TOEIC / TOEIC Speaking / OPIC / TOEFL / TEPS
+      score: ""             # 점수
+      level: ""             # 등급 (OPIC: AL/IH/IM 등)
+      date: ""              # 취득일
+    chinese: { test: "", score: "", level: "" }
+    japanese: { test: "", score: "", level: "" }
+
+  # ── 자격증 ───────────────────────────────────────────────────────
+  licenses: []
+    # - name: "정보처리기사"
+    #   organization: "한국산업인력공단"
+    #   date: "2020-06"
+
+  # ── 포트폴리오 ───────────────────────────────────────────────────
+  portfolio_urls: []
+
+  # ── 취업우대 / 보훈 ──────────────────────────────────────────────
+  preferential:
+    veteran: false
+    disabled: false
+    employment_protection: false
+    low_income: false
+
+  # ── 자주 묻는 추가질문 자동답변 ──────────────────────────────────
+  custom_answers: {}
+
+# ── 자동지원 설정 ──────────────────────────────────────────────────
+auto_apply:
+  min_interval_ms: 30000
+  max_per_session: 10
+  min_score_for_apply: 3.0
+  require_review_before_submit: true
+  # Saramin은 headless 차단 → headed mode 강제
+  force_headed: true

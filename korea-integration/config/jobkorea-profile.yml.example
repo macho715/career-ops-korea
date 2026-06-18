@@ -1,0 +1,110 @@
+# JobKorea Profile — 자동 지원서 작성용 설정
+# Copy: cp config/jobkorea-profile.yml.example config/jobkorea-profile.yml
+# This file contains sensitive data — NEVER commit to git.
+
+# ── JobKorea 로그인 정보 ──────────────────────────────────────────────
+jobkorea:
+  id: ""                    # JobKorea 아이디
+  password: ""              # JobKorea 비밀번호 (⚠ gitignore 확인)
+
+  # ── 기본 인적사항 ──────────────────────────────────────────────────
+  name_kor: ""              # 한글 이름
+  email: ""                 # 이메일 (profile.yml candidate.email 우선)
+  phone: ""                 # 전화번호 (010-XXXX-XXXX 형식)
+  birth: ""                 # 생년월일 (YYYYMMDD)
+
+  # ── 주소 ───────────────────────────────────────────────────────────
+  address:
+    zipcode: ""             # 우편번호 (5자리)
+    road: ""                # 도로명 주소
+    detail: ""              # 상세주소
+
+  # ── 학력 ───────────────────────────────────────────────────────────
+  education:
+    level: ""               # 고졸 / 전문대졸 / 대졸(4년) / 대학원(석사) / 대학원(박사)
+    school: ""              # 최종학교명
+    major: ""               # 전공
+    graduation_year: ""     # 졸업연도
+    graduation_type: ""     # 졸업 / 수료 / 재학 / 중퇴
+    gpa: ""                 # 학점 (4.5 만점 기준)
+
+  # ── 경력 ───────────────────────────────────────────────────────────
+  career:
+    total_years: ""         # 총 경력 (년)
+    recent_company: ""      # 최근 회사명
+    recent_position: ""     # 최근 직급
+    recent_tenure: ""       # 최근 재직기간 (YYYY.MM ~ YYYY.MM)
+    military:               # 병역
+      status: ""            # 해당없음 / 군필 / 면제 / 미필
+      branch: ""            # 육군 / 해군 / 공군 / 해병대
+      rank: ""              # 병장 / 중사 / 대위 ...
+
+  # ── 희망 근무 조건 ─────────────────────────────────────────────────
+  desired:
+    employment_type: ""     # 정규직 / 계약직 / 인턴
+    regions: []             # 희망 지역 ["서울", "경기"]
+    salary: ""              # 희망 연봉 (만원)
+
+  # ── 어학 ───────────────────────────────────────────────────────────
+  language:
+    english:
+      level: ""             # 상 / 중 / 하
+      test: ""              # TOEIC / TOEFL / OPIC / TEPS
+      score: ""             # 점수
+    chinese:
+      level: ""
+      test: ""
+      score: ""
+    japanese:
+      level: ""
+      test: ""
+      score: ""
+
+  # ── 추가 정보 ──────────────────────────────────────────────────────
+  hobbies: ""               # 취미/특기 (콤마 구분)
+  licenses: []              # 자격증 목록
+    # - name: "정보처리기사"
+    #   date: "2020-06"
+  portfolio_urls: []        # 포트폴리오 URL
+    # - "https://github.com/username"
+    # - "https://username.github.io"
+
+  # ── 취업우대 / 보훈 ────────────────────────────────────────────────
+  preferential:
+    veteran: false           # 보훈 대상자 여부
+    disabled: false          # 장애인 여부
+    employment_protection: false  # 취업보호대상자 여부
+
+  # ── 자주 묻는 추가질문 자동답변 ────────────────────────────────────
+  # JobKorea 공고마다 반복되는 커스텀 질문에 대한 사전 답변
+  custom_answers:
+    # 지원경로: "온라인 검색을 통해 알게 되었습니다."
+    # 자신의 장점: cv.md + report 기반으로 동적 생성
+    # 자신의 단점: cv.md + report 기반으로 동적 생성
+    # 협업 경험: cv.md STAR stories 활용
+    {}
+
+# ── 자동지원 설정 ────────────────────────────────────────────────────
+auto_apply:
+  # 지원 간 최소 간격 (밀리초)
+  min_interval_ms: 30000
+  # 세션당 최대 자동지원 횟수
+  max_per_session: 10
+  # 자동지원 최소 스코어 — 이하 점수는 지원 건너뜀
+  min_score_for_apply: 3.0
+  # 지원 전 탈퇴 확인 (true 권장)
+  require_review_before_submit: true
+
+# ── 검색 키워드 ──────────────────────────────────────────────────────
+# jobkorea scan 시 사용할 기본 검색어
+# portals.yml의 search_keywords가 없을 경우 fallback
+search:
+  default_keywords:
+    - "AI 엔지니어"
+    - "머신러닝"
+    - "데이터 엔지니어"
+    - "백엔드 개발자"
+  default_pages: 3
+  location_filter:          # 희망 근무지역
+    - "서울"
+    - "경기"
