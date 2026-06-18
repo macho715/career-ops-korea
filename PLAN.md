@@ -111,10 +111,12 @@ flowchart TD
 
 ## Risk Register
 
-| Risk | Severity | Mitigation |
-|------|----------|------------|
-| JobKorea HTML structure changes | Medium | CSS selector fallback chain; Playwright snapshot tests |
-| JobKorea legal action | High | Saramin API as primary; JobKorea personal-use-only warning |
-| Saramin API rate limit (500/day) | Low | Cache responses; multi-keyword pagination optimization |
-| Saramin API deprecation | Low | HTTP fallback to Playwright scraper |
-| Korean form field changes | Medium | Dynamic field detection (not hardcoded selectors) |
+| Risk | Severity | Mitigation | Status |
+|------|----------|------------|--------|
+| JobKorea HTML structure changes | Medium | CSS selector fallback chain; Playwright snapshot tests | — |
+| JobKorea legal action | High | Saramin API as primary; JobKorea personal-use-only warning; SAFETY.md guide | ✅ Mitigated |
+| Saramin API rate limit (500/day) | Low | Cache responses; multi-keyword pagination optimization | — |
+| Saramin API deprecation | Low | HTTP fallback to Playwright scraper | — |
+| Korean form field changes | Medium | Dynamic field detection (not hardcoded selectors) | — |
+| JobKorea headless detection | High | Force headed mode; anti-webdriver override; safety gate | ✅ Mitigated |
+| JobKorea rate-based ban | Medium | 5-min interval; 5/day limit; human-like delays; jitter | ✅ Mitigated |

@@ -20,11 +20,7 @@ import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-// When run from korea-integration/scripts/, go up 2 levels to career-ops/ root.
-// Use process.cwd() fallback for when spawned by run.mjs with correct cwd.
-const PROJECT_ROOT = existsSync(resolve(__dirname, '..', '..', 'package.json'))
-  ? resolve(__dirname, '..', '..')
-  : process.cwd();
+const PROJECT_ROOT = resolve(__dirname);
 
 // ── Constants ─────────────────────────────────────────────────────────
 
@@ -33,6 +29,17 @@ const JOBKOREA_LOGIN_URL = 'https://www.jobkorea.co.kr/Login/Login_P';
 const NAVIGATE_TIMEOUT_MS = 20_000;
 const HYDRATION_WAIT_MS = 2_000;
 const DEFAULT_THROTTLE_MS = 5_000;
+
+// ── Safety limits (JobKorea anti-ban) ─────────────────────────────────
+const SAFETY = {
+  MAX_APPLIES_PER_SESSION: 5,      // 세션당 최대 지원 횟수
+  MAX_APPLIES_PER_DAY: 10,          // 일일 최대 지원 횟수
+  MIN_INTERVAL_BETWEEN_APPLIES_MS: 5 * 60 * 1000, // 지원 간 최소 5분
+  HUMAN_DELAY_MIN_MS: 3_000,        // 최소 인간 지연
+  HUMAN_DELAY_MAX_MS: 8_000,        // 최대 인간 지연
+  SCROLL_DELAY_MS: 2_000,           // 스크롤 시뮬레이션
+  READ_DELAY_MS: 5_000,             // 공고 읽는 시간 시뮬레이션
+};
 
 const CONTEXT_OPTIONS = {
   userAgent:
@@ -719,7 +726,8 @@ async function main() {
   const dryRun = args.includes('--dry-run');
 
   const headlessArg = args.indexOf('--headless');
-  const headless = headlessArg !== -1 ? args[headlessArg + 1] !== 'false' : true;
+  // ⚠ SAFETY: JobKorea blocks headless browsers — default to headed
+  const headless = headlessArg !== -1 ? args[headlessArg + 1] === 'true' : false;
 
   const throttleArg = args.find(a => a.startsWith('--throttle='));
   const throttleMs = throttleArg ? Number(throttleArg.split('=')[1]) || DEFAULT_THROTTLE_MS : DEFAULT_THROTTLE_MS;
@@ -733,6 +741,41 @@ async function main() {
     console.log('  node jobkorea-apply.mjs --url "..." --throttle=3000');
     process.exit(1);
   }
+
+  // ═══ SAFETY GATE ════════════════════════════════════════════════════
+  if (headless && !dryRun) {
+    console.log('⚠ JobKorea blocks headless browsers — forcing headed mode.');
+    console.log('  Use --dry-run for headless preview.');
+    process.exit(1);
+  }
+
+  console.log('\n🛡  JOBKOREA SAFETY RULES — 반드시 준수');
+  console.log('  • headed 브라우저만 사용 (headless 차단됨)');
+  console.log('  • 하루 3~5건 이하로 지원');
+  console.log('  • 지원 간 최소 5분 간격');
+  console.log('  • PREFLIGHT 검토 후 수동 제출');
+  console.log('  • 개인 구직 목적으로만 사용');
+  console.log('  • 절대 자동 제출 금지');
+  console.log('  자세한 내용: docs/JOBKOREA_SAFETY.md\n');
+
+  // Check today's apply count
+  const jkTrackerPath = resolve(PROJECT_ROOT, 'data', 'jobkorea-applications.tsv');
+  const today = new Date().toISOString().slice(0, 10);
+  let todayCount = 0;
+  if (existsSync(jkTrackerPath)) {
+    const lines = readFileSync(jkTrackerPath, 'utf-8').split('\n').filter(Boolean);
+    todayCount = lines.filter(l => l.startsWith(today)).length;
+  }
+  if (todayCount >= SAFETY.MAX_APPLIES_PER_DAY && !dryRun) {
+    console.log(`⚠ 하루 최대 ${SAFETY.MAX_APPLIES_PER_DAY}건을 초과했습니다. 내일 다시 시도하세요.`);
+    process.exit(1);
+  }
+  if (todayCount >= SAFETY.MAX_APPLIES_PER_SESSION && !dryRun) {
+    console.log(`⚠ 세션 최대 ${SAFETY.MAX_APPLIES_PER_SESSION}건을 초과했습니다.`);
+    console.log('  계속하려면 --force 플래그를 추가하세요.');
+    process.exit(1);
+  }
+  // ════════════════════════════════════════════════════════════════════
 
   // Resolve URL
   let targetUrl = url;
