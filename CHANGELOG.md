@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.1](https://github.com/macho715/career-ops-korea/compare/career-ops-v1.12.0...career-ops-v1.12.1) (2026-06-18)
+
+
+### Bug Fixes
+
+* add config/saramin-profile.yml to .gitignore ([10e27ce](https://github.com/macho715/career-ops-korea/commit/10e27ce41fb84aa5097ea91313ab9013f11194c2))
+* remove config/saramin-profile.yml from tracking (credentials) ([9a8144e](https://github.com/macho715/career-ops-korea/commit/9a8144e9e7a766d61a83eb79475ae3ced3414cff))
+
 ## [Unreleased] — Korea Job Portal Integration
 
 ### Features
