@@ -70,6 +70,7 @@ plan/
 
 # Korea integration — personal config (never commit credentials)
 config/jobkorea-profile.yml
+config/saramin-profile.yml
 data/jobkorea-applications.tsv
 data/jobkorea-apply-debug.png
 _test-*.mjs
